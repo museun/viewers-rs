@@ -134,6 +134,7 @@ mod tests {
             ("1s 1m", Error::OutOfOrder),
             ("1s 1s", Error::AlreadySeen),
             ("0s", Error::InvalidData),
+            ("06s", Error::InvalidData),
         ];
 
         for (input, expected) in tests {
