@@ -1,0 +1,27 @@
+[package]
+name = "viewers"
+version = "0.1.0"
+authors = ["museun <museun@outlook.com>"]
+edition = "2018"
+
+[[bin]]
+name = "viewers"
+path = "src/bin/main.rs"
+
+[dependencies]
+log = "0.4.8"
+flexi_logger = "0.14.4"
+
+serde = { version = "1.0.101", features = ["derive"] }
+
+gtk = { version = "0.7.0", features = ["v3_24"] }
+gdk = "0.11.0"
+gio = "0.7.0"
+glib = "0.8.2"
+
+attohttpc = { version = "0.4.5", features = ["json"] }
+directories = "2.0.2"
+pico-args = "0.3.0"
+
+[build-dependencies]
+directories = "2.0.2"
