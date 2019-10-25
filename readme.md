@@ -16,15 +16,15 @@ $ viewers -c some_channel -t 30s
 - [move it](#move-it)
 - [change opacity](#change-opacity)
 
-## quit
+### quit
 press `q` to quit
 
 ---
-## move it
+### move it
 `ctrl+click` and drag it around
 
 ---
-## change opacity
+### change opacity
 `mouse wheel` **up** and **down**
 
 ---
