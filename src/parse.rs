@@ -8,12 +8,15 @@ pub fn timeout(s: &str) -> Result<u64, Error> {
             if buf.is_empty() {
                 return Err(Error::InvalidData);
             }
-            order.verify($mag)?
+            match buf.parse(order.verify($mag)?) {
+                Some(d) => d,
+                None => break,
+            }
         }};
     }
 
     while let Some(left) = iter.next() {
-        let magnitude = match (left, iter.peek()) {
+        acc += match (left, iter.peek()) {
             ('s', ..) => check_empty!(Magnitude::Second),
             ('m', ..) => check_empty!(Magnitude::Minute),
             ('h', ..) => check_empty!(Magnitude::Hour),
@@ -24,13 +27,9 @@ pub fn timeout(s: &str) -> Result<u64, Error> {
                 buf.append(c);
                 continue;
             }
+            (c, None) if c.is_ascii_digit() => return Err(Error::InvalidData),
             _ => continue,
         };
-
-        acc += match buf.parse(magnitude) {
-            Some(d) => d,
-            None => break,
-        }
     }
 
     return Ok(acc);
@@ -135,6 +134,8 @@ mod tests {
             ("1s 1s", Error::AlreadySeen),
             ("0s", Error::InvalidData),
             ("06s", Error::InvalidData),
+            ("1m 1", Error::InvalidData),
+            ("1s1", Error::InvalidData),
         ];
 
         for (input, expected) in tests {
