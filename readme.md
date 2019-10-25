@@ -13,8 +13,8 @@ $ viewers -c some_channel -t 30s
 
 # how do I..?
 - [quit](#quit)
-- [move it](#move_it)
-- [change opacity](#change_opacity)
+- [move it](#move-it)
+- [change opacity](#change-opacity)
 
 ## quit
 press `q` to quit
