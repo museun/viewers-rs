@@ -64,15 +64,19 @@ impl App {
 
             window.add_events(gdk::EventMask::SCROLL_MASK | gdk::EventMask::BUTTON_PRESS_MASK);
             window.connect_key_press_event(move |win, key| {
-                if gdk::keyval_name(key.get_keyval())
-                    .filter(|s| s.as_str() == "q")
-                    .is_some()
-                {
-                    if let Some(app) = win.get_application() {
-                        log::info!("quitting!");
-                        app.quit()
-                    }
+                if let Some(key) = gdk::keyval_name(key.get_keyval()) {
+                    match key.as_str() {
+                        "q" => {
+                            if let Some(app) = win.get_application() {
+                                log::info!("quitting!");
+                                app.quit()
+                            }
+                        }
+                        "t" => { /* TODO keep track if we're above or not */ }
+                        _ => {}
+                    };
                 }
+
                 gtk::Inhibit(false)
             });
 
